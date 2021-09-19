@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+	<head>
+		<meta charset="utf-8">
+		<title>关于我</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!--  -->
+		<link rel="stylesheet" th:href="@{../layui/css/layui.css}"  media="all">
+		<link rel="stylesheet" th:href="@{../css/myCss.css}"  media="all">
+	</head>
+	<body>
+		<!--  lay-bar="disabled"禁止滑块跟随 -->
+		<!-- 导航栏 -->
+		<ul class="layui-nav">
+			<!--  -->
+			<li class="layui-nav-item"><a th:href="@{/}">Nihilityer</a></li>
+			<li class="layui-nav-item"><a th:href="@{/blog}">博客</a></li>
+			<li class="layui-nav-item"><a th:href="@{/timeline}">时间线</a></li>
+			<!-- <li class="layui-nav-item"><a href="">日记</a></li> -->
+			<li class="layui-nav-item"><a th:href="@{/stack}">技术栈</a></li>
+			<li class="layui-nav-item layui-this"><a th:href="@{/about}">关于</a></li>
+			<!-- 有消息时加上 layui-bg-red -->
+			<!-- <li class="layui-nav-item layui-layout-right" style="margin-right: 0;">
+				<a href=""><i class="layui-icon layui-icon-notice"></i></a>
+			</li> -->
+			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
+				<div sec:authorize="!isAuthenticated()">
+					<a th:href="@{/login}">
+						<i class="layui-icon layui-icon-username"></i>
+						游客
+					</a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<a href="javascript:;">
+						<i class="layui-icon layui-icon-username"></i>
+						nihilityer
+					</a>
+					<dl class="layui-nav-child layui-bg-black">
+						<dd><a th:href="@{/admin/mBlog}">管理博客</a></dd>
+						<dd><a th:href="@{/admin/}">设置</a></dd>
+						<dd><a th:href="@{/logout}">注销</a></dd>
+					</dl>
+				</div>
+			</li>
+		</ul>
+		
+		//
+		<div class="layui-row" style="min-height: 94vh;">
+			<div class="layui-col-lg6 layui-col-lg-offset3 layui-card" style="margin-top: 2%;">
+				<div class="layui-card-header" style="text-align: center;">
+					<strong>关于我</strong>
+				</div>
+				<div align="center">
+				    <p><strong>
+						<hr class="layui-bg-green" />
+						大三才会做项目的菜鸟一只
+						<hr class="layui-bg-green" />
+						喜欢看书，游戏，听歌
+						<hr class="layui-bg-green" />
+						就是不喜欢出门，拒绝不纯洁社交
+						<hr class="layui-bg-green" />
+						涉世不深的憨憨一个
+						<hr class="layui-bg-green" />
+						但是不想改变
+						<hr class="layui-bg-green" />
+						无法被自我理解的行动准则
+						<hr class="layui-bg-green" />
+						随心而动
+						<hr class="layui-bg-green" />
+						希望利用好能够放肆任性的两年
+						<hr class="layui-bg-green" />
+						---------分割线---------
+						<hr class="layui-bg-green" />
+						此网站准备做长期优化
+						<hr class="layui-bg-green" />
+						有建议欢迎提出
+						<hr class="layui-bg-green" />
+						QQ：2796945700
+						<hr class="layui-bg-green" />
+					</strong></p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 页脚 -->
+		<div class="layui-col-lg12">
+		    <div class="layui-panel layui-bg-black" style="border: #0C0C0C;">
+		        <div style="padding: 30px;">一个面板</div>
+		    </div>   
+		</div>
+	</body>
+	<script th:src="@{../layui/layui.js}" charset="utf-8"></script>
+</html>

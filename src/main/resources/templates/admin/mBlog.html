@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="utf-8">
+		<title>管理博客</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!--  -->
+		<link rel="stylesheet" th:href="@{../../layui/css/layui.css}"  media="all">
+		<link rel="stylesheet" th:href="@{../../css/myCss.css}"  media="all">
+	</head>
+	<body>
+		<!--  lay-bar="disabled"禁止滑块跟随 -->
+		<!-- 导航栏 -->
+		<ul class="layui-nav">
+			<!--  -->
+			<li class="layui-nav-item"><a th:href="@{/admin/}">Admin</a></li>
+			<li class="layui-nav-item layui-this"><a th:href="@{/admin/mBlog}">管理博客</a></li>
+			<li class="layui-nav-item"><a th:href="@{/admin/writeBlog}">新博客</a></li>
+			<li class="layui-nav-item"><a th:href="@{/admin/newTimeline}">写时间线</a></li>
+			<li class="layui-nav-item"><a th:href="@{/admin/addStack}">技术栈</a></li>
+			<!-- 有消息时加上 layui-bg-red -->
+			<!-- <li class="layui-nav-item layui-layout-right" style="margin-right: 0;">
+				<a href=""><i class="layui-icon layui-icon-notice"></i><span class="layui-badge-dot"></span></a>
+			</li> -->
+			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
+				<div sec:authorize="!isAuthenticated()">
+					<a th:href="@{/login}">
+						<i class="layui-icon layui-icon-username"></i>
+						游客
+					</a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<a href="javascript:;">
+						<i class="layui-icon layui-icon-username"></i>
+						nihilityer
+					</a>
+					<dl class="layui-nav-child layui-bg-black">
+						<dd><a th:href="@{/}">前台页面</a></dd>
+						<dd><a th:href="@{/logout}">注销</a></dd>
+					</dl>
+				</div>
+			</li>
+		</ul>
+		
+		<div class="layui-row" style="min-height: 94vh;">
+			<div class="layui-col-lg6 layui-col-lg-offset3 layui-card" style="margin-top: 2%;">
+				<div class="layui-card-header" style="text-align: center;"><b>博客列表</b></div>
+				<div class="layui-card-body">
+					<div class="layui-panel" style="height: 6.25rem;"  th:each="blog, blogStat:${blogList}">
+						<a th:href="@{'/reading/'+${blog.getBlogId()}}" class="layui-col-lg12" target="_blank" style="margin-left: 5%; height: 20%; margin-top: 1%;">
+							<strong th:text="${blog.getBlogTitle()}"></strong>
+						</a>
+						<div class="" style="margin-top: 6%; margin-left: 2%;">
+							<a href="" th:text="${blog.getCreater()}"></a>
+							<span style="margin-left: 1.25rem;" th:text="'创建时间: '+${format.format(blog.getCreateTime())}"></span>
+							<a th:href="@{'/admin/writeBlog/'+${blog.getBlogId()}}" class="layui-btn" style="margin-left: 1.25rem;">修改</a>
+							<a th:href="@{'/admin/delete/'+${blog.getBlogId()}}" class="layui-btn" style="margin-left: 1.25rem;">删除</a>
+<!--						<button type="button" class="layui-btn">隐藏</button>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 页脚 -->
+		<div class="layui-col-lg12">
+		    <div class="layui-panel layui-bg-black" style="border: #0C0C0C;" algin="center">
+		        <div style="padding: 30px;">一个面板</div>
+		    </div>   
+		</div>
+	</body>
+	<script th:src="@{../../layui/layui.js}" charset="utf-8"></script>
+	<script>
+		function modify() {
+			document.form.action = "./modify";
+			document.form.submit();
+		}
+
+		function deleteById() {
+			document.form.action = "./delete";
+			document.form.submit();
+		}
+	</script>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+	<head>
+		<meta charset="utf-8">
+		<title>浏览博客</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!--  -->
+		<link rel="stylesheet" th:href="@{../layui/css/layui.css}"  media="all">
+		<link rel="stylesheet" th:href="@{../css/myCss.css}"  media="all">
+	</head>
+	<body>
+		<!--  lay-bar="disabled"禁止滑块跟随 -->
+		<!-- 导航栏 -->
+		<ul class="layui-nav">
+			<!--  -->
+			<li class="layui-nav-item"><a th:href="@{/}">Nihilityer</a></li>
+			<li class="layui-nav-item layui-this"><a th:href="@{/blog}">博客</a></li>
+			<li class="layui-nav-item"><a th:href="@{/timeline}">时间线</a></li>
+			<!-- <li class="layui-nav-item"><a href="">日记</a></li> -->
+			<li class="layui-nav-item"><a th:href="@{/stack}">技术栈</a></li>
+			<li class="layui-nav-item"><a th:href="@{/about}">关于</a></li>
+			<!-- 有消息时加上 layui-bg-red -->
+			<!-- <li class="layui-nav-item layui-layout-right" style="margin-right: 0;">
+				<a href=""><i class="layui-icon layui-icon-notice"></i></a>
+			</li> -->
+			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
+				<div sec:authorize="!isAuthenticated()">
+					<a th:href="@{/login}">
+						<i class="layui-icon layui-icon-username"></i>
+						游客
+					</a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<a href="javascript:;">
+						<i class="layui-icon layui-icon-username"></i>
+						nihilityer
+					</a>
+					<dl class="layui-nav-child layui-bg-black">
+						<dd><a th:href="@{/admin/mBlog}">管理博客</a></dd>
+						<dd><a th:href="@{/admin/}">设置</a></dd>
+						<dd><a th:href="@{/logout}">注销</a></dd>
+					</dl>
+				</div>
+			</li>
+		</ul>
+		
+		<!-- 页面主体 -->
+		<div class="layui-row" style="min-height: 94vh;">
+			<div class="layui-col-lg6 layui-col-lg-offset3 layui-card" style="margin-top: 2%;">
+				<div class="layui-card-header" style="text-align: center;"><b>博客列表</b></div>
+				<div class="layui-card-body" th:each="blog, blogStat:${blogList}">
+					<!-- 一条博客占一个 -->
+					<div class="layui-panel" style="height: 11.5rem;">
+						<a th:href="@{'/reading/'+${blog.getBlogId()}}" class="layui-col-lg12" target="_blank" style="margin-left: 5%; height: 20%; margin-top: 1%;">
+							<strong th:text="${blog.getBlogTitle()}"></strong>
+						</a>
+						<p class="layui-col-lg12" style="margin-left: 2%;">
+							<a href="" class="layui-col-lg2 layui-show-lg-inline-block">
+								<img th:src="@{../img/start.jpg}" style="height: 6.25rem; width: 6.25rem;" class="" />
+							</a><!--46个汉字换行，四行输出为止，输入时注意一下-->
+<!--								[[${blog.getText()}]]-->
+						</p>
+						<div class="" style="margin-top: 15%; margin-left: 2%;">
+							<a href="" th:text="${blog.getCreater()}">博主</a>
+							<span th:text="'创建时间: '+${format.format(blog.getCreateTime())}">发布时间</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 右侧栏目大div -->
+			<div class="layui-col-lg2" style="margin-top: 2%; margin-left: 1%;">
+				<!-- 座右铭 -->
+				<div class="layui-card">
+					<div class="layui-card-header" style="text-align: center">乘风万里，不问归期</div>
+					<div class="layui-card-body">
+						万里之行，未有归途
+					</div>
+				</div>
+				<!-- 往期文章列表 -->
+				<div class="layui-card" style="margin-top: 10%;">
+					<div class="layui-card-header">往期文章</div>
+					<div class="layui-card-body" th:each="blog, blogStat:${blogList}">
+						<a th:href="@{'/reading/'+${blog.getBlogId()}}"><p th:text="${blog.getBlogTitle()}"></p></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 页脚 -->
+		<div class="layui-col-lg12">
+		    <div class="layui-panel layui-bg-black" style="border: #0C0C0C;">
+		        <div style="padding: 30px;">一个面板</div>
+		    </div>   
+		</div>
+	</body>
+	<script th:src="@{../layui/layui.js}" charset="utf-8"></script>
+</html>

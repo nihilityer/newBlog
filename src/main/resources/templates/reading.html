@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+	<head>
+		<meta charset="utf-8">
+		<title th:text="${title}"></title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!--  -->
+		<link rel="stylesheet" th:href="@{../layui/css/layui.css}"  media="all">
+		<link rel="stylesheet" th:href="@{../css/myCss.css}"  media="all">
+		<link rel="stylesheet" th:href="@{../editor.md/examples/css/editormd.css}" media="all">
+	</head>
+	<body>
+		<!--  lay-bar="disabled"禁止滑块跟随 -->
+		<!-- 导航栏 -->
+		<ul class="layui-nav">
+			<!--  -->
+			<li class="layui-nav-item"><a th:href="@{/}">Nihilityer</a></li>
+			<li class="layui-nav-item layui-this"><a th:href="@{/blog}">博客</a></li>
+			<li class="layui-nav-item"><a th:href="@{/timeline}">时间线</a></li>
+			<!-- <li class="layui-nav-item"><a href="">日记</a></li> -->
+			<li class="layui-nav-item"><a th:href="@{/stack}">技术栈</a></li>
+			<li class="layui-nav-item"><a th:href="@{/about}">关于</a></li>
+			<!-- 有消息时加上 layui-bg-red -->
+			<!-- <li class="layui-nav-item layui-layout-right" style="margin-right: 0;">
+				<a href=""><i class="layui-icon layui-icon-notice"></i></a>
+			</li> -->
+			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
+				<div sec:authorize="!isAuthenticated()">
+					<a th:href="@{/login}">
+						<i class="layui-icon layui-icon-username"></i>
+						游客
+					</a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<a href="javascript:;">
+						<i class="layui-icon layui-icon-username"></i>
+						nihilityer
+					</a>
+					<dl class="layui-nav-child layui-bg-black">
+						<dd><a th:href="@{/admin/mBlog}">管理博客</a></dd>
+						<dd><a th:href="@{/admin/}">设置</a></dd>
+						<dd><a th:href="@{/logout}">注销</a></dd>
+					</dl>
+				</div>
+			</li>
+		</ul>
+		
+<!--		主体-->
+		<div class="layui-row" style="min-height: 94vh;">
+			<div class="layui-col-lg6 layui-col-lg-offset3 layui-card" style="margin-top: 2%;">
+
+				<div class="layui-header" style="text-align: center; height: 20%">
+					<h1 th:text="${title}"></h1>
+					<h3 th:text="${createId}+'&nbsp&nbsp&nbsp&nbsp&nbsp'+${creater}"></h3>
+					<h6 th:text="${createTime}"></h6>
+					<hr>
+				</div>
+				<div>
+					<div id="test-editormd" style="width: 94%">
+						<textarea id="append-test" style="display:none;">[[${textMain}]]</textarea>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		<!-- 页脚 -->
+		<div class="layui-col-lg12">
+		    <div class="layui-panel layui-bg-black" style="border: #0C0C0C;">
+		        <div style="padding: 30px;">一个面板</div>
+		    </div>   
+		</div>
+	</body>
+	<script th:src="@{../layui/layui.js}" charset="utf-8"></script>
+	<script th:src="@{../editor.md/examples/js/jquery.min.js}"></script>
+	<script th:src="@{../editor.md/lib/marked.min.js}"></script>
+	<script th:src="@{../editor.md/lib/prettify.min.js}"></script>
+	<script th:src="@{../editor.md/lib/raphael.min.js}"></script>
+	<script th:src="@{../editor.md/lib/underscore.min.js}"></script>
+	<script th:src="@{../editor.md/lib/sequence-diagram.min.js}"></script>
+	<script th:src="@{../editor.md/lib/flowchart.min.js}"></script>
+	<script th:src="@{../editor.md/lib/jquery.flowchart.min.js}"></script>
+	<script th:src="@{../editor.md/examples/js/editormd.min.js}"></script>
+	<script type="text/javascript">
+		$(function() {
+			var testEditor;
+			testEditor = editormd.markdownToHTML("test-editormd", {
+				htmlDecode      : "style,script,iframe",  // you can filter tags decode
+				emoji           : true,
+				taskList        : true,
+				tex             : true,  // 默认不解析
+				flowChart       : true,  // 默认不解析
+				sequenceDiagram : true,  // 默认不解析
+				width			: "90%",
+			});
+		});
+	</script>
+</html>
