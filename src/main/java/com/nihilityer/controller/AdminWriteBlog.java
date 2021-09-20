@@ -63,6 +63,11 @@ public class AdminWriteBlog {
     @PostMapping("/admin/writeBlog")
     public void writeBlog(@Param("title")String title, @Param("textBody")String textBody, HttpServletResponse response) throws IOException {
 
+        boolean b = updateWebInfoService.addBlogNumberOne();
+        if (!b) {
+            throw new RuntimeException("数据库更新失败");
+        }
+
         Blog blog = new Blog();
         blog.setBlogTitle(title);
         blog.setText(textBody);
