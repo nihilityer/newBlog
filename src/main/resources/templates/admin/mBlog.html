@@ -57,7 +57,6 @@
 							<span style="margin-left: 1.25rem;" th:text="'创建时间: '+${format.format(blog.getCreateTime())}"></span>
 							<a th:href="@{'/admin/writeBlog/'+${blog.getBlogId()}}" class="layui-btn" style="margin-left: 1.25rem;">修改</a>
 							<a th:href="@{'/admin/delete/'+${blog.getBlogId()}}" class="layui-btn" style="margin-left: 1.25rem;">删除</a>
-<!--						<button type="button" class="layui-btn">隐藏</button>-->
 						</div>
 					</div>
 				</div>
