@@ -51,6 +51,12 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 //不关闭的话注销会失败
                 .csrf().disable();
 
+        //只允许登陆一个
+        http.sessionManagement()
+                .maximumSessions(1)
+                .expiredUrl("/login");
+
+
     }
 
     @Override
