@@ -6,7 +6,7 @@ import lombok.*;
 /**
  * @PackageName com.nihilityer.entity
  * @ClassName User
- * @Description
+ * @Description user的实体类
  * @Author nihilityer
  * @Date 2021/9/8 21:55
  */

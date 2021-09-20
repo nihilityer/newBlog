@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName TimeLineController
- * @Description
+ * @Description 时间线页controller，可以说是日记
  * @Author nihilityer
  * @Date 2021/9/8 14:50
  */
@@ -31,6 +31,10 @@ public class TimeLineController {
         this.updateWebInfoService = updateWebInfoService;
     }
 
+    /**
+     *
+     * @return 输出时逆置，最新添加的在最前面
+     */
     @GetMapping("/timeline")
     public ModelAndView toTimeLine() {
         ModelAndView timeline = new ModelAndView();

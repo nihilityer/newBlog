@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName IndexController
- * @Description 主页跳转
+ * @Description 主页跳转controller，除了添加一次访问量不增加其他的
  * @Author nihilityer
  * @Date 2021/9/8 10:12
  */

@@ -11,20 +11,13 @@
 		<link rel="stylesheet" th:href="@{../css/myCss.css}"  media="all">
 	</head>
 	<body>
-		<!--  lay-bar="disabled"禁止滑块跟随 -->
 		<!-- 导航栏 -->
 		<ul class="layui-nav">
-			<!--  -->
 			<li class="layui-nav-item"><a th:href="@{/}">Nihilityer</a></li>
 			<li class="layui-nav-item layui-this"><a th:href="@{/blog}">博客</a></li>
 			<li class="layui-nav-item"><a th:href="@{/timeline}">时间线</a></li>
-			<!-- <li class="layui-nav-item"><a href="">日记</a></li> -->
 			<li class="layui-nav-item"><a th:href="@{/stack}">技术栈</a></li>
 			<li class="layui-nav-item"><a th:href="@{/about}">关于</a></li>
-			<!-- 有消息时加上 layui-bg-red -->
-			<!-- <li class="layui-nav-item layui-layout-right" style="margin-right: 0;">
-				<a href=""><i class="layui-icon layui-icon-notice"></i></a>
-			</li> -->
 			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
 				<div sec:authorize="!isAuthenticated()">
 					<a th:href="@{/login}">
@@ -58,9 +51,8 @@
 						</a>
 						<p class="layui-col-lg12" style="margin-left: 2%;">
 							<a href="" class="layui-col-lg2 layui-show-lg-inline-block">
-								<img th:src="@{../img/start.jpg}" style="height: 6.25rem; width: 6.25rem;" class="" />
-							</a><!--46个汉字换行，四行输出为止，输入时注意一下-->
-<!--								[[${blog.getText()}]]-->
+								<img th:src="@{../img/start.jpg}" style="height: 6.25rem; width: 6.25rem;" class=""  alt="test"/>
+							</a>
 						</p>
 						<div class="" style="margin-top: 15%; margin-left: 2%;">
 							<a href="" th:text="${blog.getCreater()}">博主</a>

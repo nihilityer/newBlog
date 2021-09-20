@@ -6,7 +6,7 @@ import lombok.*;
 /**
  * @PackageName com.nihilityer.entity
  * @ClassName TStack
- * @Description
+ * @Description tstack表的实体类
  * @Author nihilityer
  * @Date 2021/9/8 22:15
  */

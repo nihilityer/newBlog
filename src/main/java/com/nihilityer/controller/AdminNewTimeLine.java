@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -18,7 +20,7 @@ import java.util.List;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName AdminNewTimeLine
- * @Description
+ * @Description 添加时间线页的controller，至于添加，没有删除，相当于日记吧
  * @Author nihilityer
  * @Date 2021/9/8 15:19
  */
@@ -34,6 +36,10 @@ public class AdminNewTimeLine {
         this.updateWebInfoService = updateWebInfoService;
     }
 
+    /**
+     *
+     * @return 读取数据库中时间线内容后输出，输出时与数据库存储相反，所以逆置
+     */
     @GetMapping("/admin/newTimeline")
     public ModelAndView toNewTimeLine() {
         ModelAndView newTimeLine = new ModelAndView();
@@ -60,9 +66,14 @@ public class AdminNewTimeLine {
         return newTimeLine;
     }
 
+    /**
+     *
+     * @param title 时间线内容
+     * @param response 跳转所需参数
+     * @throws IOException 跳转会抛出的异常
+     */
     @PostMapping("/admin/newTimeline")
-    public ModelAndView addNewTimeline(@Param("title") String title) {
-        ModelAndView newTimeLine = new ModelAndView();
+    public void addNewTimeline(@Param("title") String title, HttpServletResponse response) throws IOException {
 
         Timeline timeline = new Timeline();
         timeline.setTime(new Date());
@@ -72,21 +83,7 @@ public class AdminNewTimeLine {
             throw new RuntimeException("插入失败！");
         }
 
-        QueryWrapper<Timeline> timelineQueryWrapper = new QueryWrapper<>();
-        timelineQueryWrapper.groupBy("index_id");
-        List<Timeline> timelines = timelineMapper.selectList(timelineQueryWrapper);
-
-        //逆置列表
-        Collections.reverse(timelines);
-
-        //之后还得加上时间线里的列表输出
-        newTimeLine.addObject("timelines",timelines);
-
-        SimpleDateFormat toStringFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        newTimeLine.addObject("format", toStringFormat);
-
-        newTimeLine.setViewName("admin/newTimeline");
-        return newTimeLine;
+        response.sendRedirect("/admin/newTimeline");
     }
 
 }

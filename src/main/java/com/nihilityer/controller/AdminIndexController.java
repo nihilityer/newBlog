@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName AdminIndexController
- * @Description
+ * @Description 管理后台的首页，显示已有博客数、页面访问数、此页面访问不增加访问量
  * @Author nihilityer
  * @Date 2021/9/8 15:02
  */
@@ -24,11 +24,6 @@ public class AdminIndexController {
     @GetMapping("/admin/")
     public ModelAndView toAdmin() {
         ModelAndView admin = new ModelAndView();
-
-        boolean isUpdate = updateWebInfoService.addVisitsOne();
-        if (!isUpdate) {
-            throw new RuntimeException("数据库更新失败");
-        }
 
         int visitsNumber = updateWebInfoService.getVisitsNumber();
         admin.addObject("visitsNumber", visitsNumber);

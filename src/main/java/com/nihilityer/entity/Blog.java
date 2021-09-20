@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * @PackageName com.nihilityer.entity
  * @ClassName Blog
- * @Description
+ * @Description blog表的实体类
  * @Author nihilityer
  * @Date 2021/9/8 22:18
  */

@@ -30,6 +30,10 @@ public class BlogController {
         this.updateWebInfoService = updateWebInfoService;
     }
 
+    /**
+     *
+     * @return 输出博客列表，传入一个时间格式规范对象，让前台能够更好地输出时间
+     */
     @GetMapping("/blog")
     public ModelAndView toBlog() {
         ModelAndView blog = new ModelAndView();

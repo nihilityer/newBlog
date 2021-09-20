@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName AboutController
- * @Description
+ * @Description about页面的controller，只有跳转和
  * @Author nihilityer
  * @Date 2021/9/8 14:56
  */

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName LoginController
- * @Description
+ * @Description 登陆页跳转，无其他功能
  * @Author nihilityer
  * @Date 2021/9/8 15:01
  */

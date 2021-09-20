@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * @PackageName com.nihilityer.entity
  * @ClassName WebInfo
- * @Description
+ * @Description webinfo表的实体类
  * @Author nihilityer
  * @Date 2021/9/16 20:35
  */

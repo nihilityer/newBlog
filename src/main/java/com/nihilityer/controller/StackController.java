@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName StackController
- * @Description
+ * @Description 技术栈显示页面controller。
  * @Author nihilityer
  * @Date 2021/9/8 14:54
  */
@@ -30,6 +30,10 @@ public class StackController {
         this.updateWebInfoService = updateWebInfoService;
     }
 
+    /**
+     *
+     * @return 将值存入二维数组中，前台显示后值刚好嵌入到js代码中。
+     */
     @GetMapping("/stack")
     public ModelAndView toStack() {
         ModelAndView technologyStack = new ModelAndView();

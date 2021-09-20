@@ -6,27 +6,20 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<!--  -->
 		<link rel="stylesheet" th:href="@{../../layui/css/layui.css}"  media="all">
 		<link rel="stylesheet" th:href="@{../../css/myCss.css}"  media="all">
 		
-<!--		//词云支持-->
+		<!--/*词云支持*/-->
 		<script src="https://cdn.bootcss.com/wordcloud2.js/1.1.0/wordcloud2.js"></script>
 	</head>
 	<body>
-		<!--  lay-bar="disabled"禁止滑块跟随 -->
 		<!-- 导航栏 -->
 		<ul class="layui-nav">
-			<!--  -->
 			<li class="layui-nav-item"><a th:href="@{/admin/}">Admin</a></li>
 			<li class="layui-nav-item"><a th:href="@{/admin/mBlog}">管理博客</a></li>
 			<li class="layui-nav-item"><a th:href="@{/admin/writeBlog}">新博客</a></li>
 			<li class="layui-nav-item"><a th:href="@{/admin/newTimeline}">写时间线</a></li>
 			<li class="layui-nav-item layui-this"><a th:href="@{/admin/addStack}">技术栈</a></li>
-			<!-- 有消息时加上 layui-bg-red -->
-			<!-- <li class="layui-nav-item layui-layout-right" style="margin-right: 0;">
-				<a href=""><i class="layui-icon layui-icon-notice"></i><span class="layui-badge-dot"></span></a>
-			</li> -->
 			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
 				<div sec:authorize="!isAuthenticated()">
 					<a th:href="@{/login}">
@@ -52,7 +45,6 @@
 				<div class="layui-card-header" style="text-align: center;">
 					<strong>目前掌握的知识与掌握程度</strong>
 				</div>
-				<!-- 后台处理的时候要判断相同时直接添加掌握程度 -->
 				<form class="layui-form" method="post">
 					<div class="layui-form-item" style="margin-top: 3%; margin-bottom: 2%;">
 						<label class="layui-form-label">新技能</label>

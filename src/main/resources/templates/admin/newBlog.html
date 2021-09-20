@@ -21,12 +21,12 @@
 			<li class="layui-nav-item"><a th:href="@{/admin/newTimeline}">写时间线</a></li>
 			<li class="layui-nav-item"><a th:href="@{/admin/addStack}">技术栈</a></li>
 			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
-				<!-- <div sec:authorize="!isAuthenticated()">
+				<div sec:authorize="!isAuthenticated()">
 					<a th:href="@{/login}">
 						<i class="layui-icon layui-icon-username"></i>
 						游客
 					</a>
-				</div> -->
+				</div>
 				<div sec:authorize="isAuthenticated()">
 					<a href="javascript:;">
 						<i class="layui-icon layui-icon-username"></i>

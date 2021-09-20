@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName AdminMengerBlog
- * @Description
+ * @Description 管理博客页的controller。
  * @Author nihilityer
  * @Date 2021/9/8 15:12
  */
@@ -31,6 +33,10 @@ public class AdminMengerBlog {
         this.updateWebInfoService = updateWebInfoService;
     }
 
+    /**
+     *
+     * @return 增加1访问量后查找所有博客，并在页面输出，
+     */
     @GetMapping("/admin/mBlog")
     public ModelAndView toMengerBlog() {
         ModelAndView mengerBlog = new ModelAndView();
@@ -45,7 +51,7 @@ public class AdminMengerBlog {
         List<Blog> blogs = blogMapper.selectList(blogQueryWrapper);
 
         mengerBlog.addObject("blogList",blogs);
-
+        //时间输出格式调整
         SimpleDateFormat toStringFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         mengerBlog.addObject("format", toStringFormat);
 
@@ -54,8 +60,7 @@ public class AdminMengerBlog {
     }
 
     @GetMapping("/admin/delete/{blogId}")
-    public ModelAndView deleteById(@PathVariable("blogId") int blogId) {
-        ModelAndView mengerBlog = new ModelAndView();
+    public void deleteById(@PathVariable("blogId") int blogId, HttpServletResponse response) throws IOException {
 
         QueryWrapper<Blog> blogQueryWrapper = new QueryWrapper<>();
         blogQueryWrapper.eq("blog_id", blogId);
@@ -63,23 +68,13 @@ public class AdminMengerBlog {
         if (delete != 1) {
             throw new RuntimeException("删除失败！");
         }
-
+        //删除博客后更新一下系统信息数据库
         boolean b = updateWebInfoService.reduceBlogNumberOne();
         if (!b) {
             throw new RuntimeException("更新失败！");
         }
-
-        QueryWrapper<Blog> queryWrapper = new QueryWrapper<>();
-        queryWrapper.groupBy("blog_id");
-        List<Blog> blogs = blogMapper.selectList(queryWrapper);
-
-        mengerBlog.addObject("blogList",blogs);
-
-        SimpleDateFormat toStringFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        mengerBlog.addObject("format", toStringFormat);
-
-        mengerBlog.setViewName("admin/mBlog");
-        return mengerBlog;
+        //使用跳转，而不是直接return一个页面数据组合来显示，不显示路径，防止刷现出错。
+        response.sendRedirect("/admin/mBlog");
     }
 
 }

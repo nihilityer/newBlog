@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * @PackageName com.nihilityer.controller
  * @ClassName AdminWriteBlog
- * @Description
+ * @Description 写博客页的controller，其实都是新建一个，只不过修改是在已有内容上修改，方便快捷
  * @Author nihilityer
  * @Date 2021/9/8 15:15
  */
@@ -34,6 +34,10 @@ public class AdminWriteBlog {
         this.blogMapper = blogMapper;
     }
 
+    /**
+     *  添加一个空的实体是因为前端页面有对blog的取值，不提供空值会出错
+     * @return 跳转到页面
+     */
     @GetMapping("/admin/writeBlog")
     public ModelAndView toWriteBlog() {
         ModelAndView writeBlog = new ModelAndView();
@@ -49,6 +53,13 @@ public class AdminWriteBlog {
         return writeBlog;
     }
 
+    /**
+     *
+     * @param title 博客标题
+     * @param textBody 博客正文，使用的是markdown存储
+     * @param response 页面跳转所需参数
+     * @throws IOException 页面跳转抛出的异常
+     */
     @PostMapping("/admin/writeBlog")
     public void writeBlog(@Param("title")String title, @Param("textBody")String textBody, HttpServletResponse response) throws IOException {
 
@@ -66,6 +77,11 @@ public class AdminWriteBlog {
         response.sendRedirect("/admin/mBlog");
     }
 
+    /**
+     *
+     * @param blogId 路径访问值，对应相应的博客id
+     * @return 将博客内容取出后传值并输出，方便修改
+     */
     @GetMapping("/admin/writeBlog/{blogId}")
     public ModelAndView modifyBlog(@PathVariable("blogId") int blogId) {
         ModelAndView writeBlog = new ModelAndView();

@@ -48,14 +48,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
-
-                //开启记住我功能，默认为两周
-//                .rememberMe()
-//                .rememberMeParameter("rememberMe")
-//                .userDetailsService(userDetailsService)
-//                .tokenValiditySeconds(60 * 60 * 24 * 7) // 记住我的时间(秒)
-//                .and()
-
+                //不关闭的话注销会失败
                 .csrf().disable();
 
     }
