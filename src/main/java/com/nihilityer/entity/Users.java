@@ -1,5 +1,6 @@
 package com.nihilityer.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
@@ -15,9 +16,14 @@ import lombok.*;
 @NoArgsConstructor
 @TableName("userinfo")
 public class Users {
+    @TableId("user_id")
     private String userId;
+    @TableId("user_name")
     private String userName;
+    @TableId("user_password")
     private String userPassword;
+    @TableId("user_sex")
     private Integer userSex;
+    @TableId("user_role")
     private String userRole;
 }

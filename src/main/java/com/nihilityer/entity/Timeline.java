@@ -1,5 +1,6 @@
 package com.nihilityer.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
@@ -17,7 +18,10 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("timeline")
 public class Timeline {
+    @TableId("index_id")
     private Integer indexId;
+    @TableId("time")
     private Date time;
+    @TableId("time_text")
     private String timeText;
 }

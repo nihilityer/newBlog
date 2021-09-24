@@ -1,5 +1,6 @@
 package com.nihilityer.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
@@ -15,6 +16,8 @@ import lombok.*;
 @AllArgsConstructor
 @TableName("tstack")
 public class TStack {
+    @TableId("name")
     private String name;
+    @TableId("grade")
     private Integer grade;
 }
