@@ -31,7 +31,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 //hasAnyAuthority是有多个权限时使用，使用role的区别是在判断的时候会加上ROLE_去判断
-                .antMatchers("/admin/**").hasAuthority("root")
+                .antMatchers("/admin/addStack").hasAuthority("root")
+                .antMatchers("/admin/newTimeline").hasAuthority("root")
+                .antMatchers("/admin/**").hasAnyAuthority("root","user")
                 .and()
 
                 //设置跳转登陆页

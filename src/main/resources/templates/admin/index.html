@@ -16,8 +16,8 @@
 			<li class="layui-nav-item layui-this"><a th:href="@{/admin/}">Admin</a></li>
 			<li class="layui-nav-item"><a th:href="@{/admin/mBlog}">管理博客</a></li>
 			<li class="layui-nav-item"><a th:href="@{/admin/writeBlog}">新博客</a></li>
-			<li class="layui-nav-item"><a th:href="@{/admin/newTimeline}">写时间线</a></li>
-			<li class="layui-nav-item"><a th:href="@{/admin/addStack}">技术栈</a></li>
+			<li class="layui-nav-item" sec:authorize="hasAuthority('root')"><a th:href="@{/admin/newTimeline}">写时间线</a></li>
+			<li class="layui-nav-item" sec:authorize="hasAuthority('root')"><a th:href="@{/admin/addStack}">技术栈</a></li>
 			<li class="layui-nav-item layui-layout-right layui-hide layui-show-md-inline-block" style="margin-right: 3%;">
 				<div sec:authorize="!isAuthenticated()">
 					<a th:href="@{/login}">
@@ -28,7 +28,7 @@
 				<div sec:authorize="isAuthenticated()">
 					<a href="javascript:;">
 						<i class="layui-icon layui-icon-username"></i>
-						nihilityer
+						<span sec:authentication="name"></span>
 					</a>
 					<dl class="layui-nav-child layui-bg-black">
 						<dd><a th:href="@{/}">前台页面</a></dd>

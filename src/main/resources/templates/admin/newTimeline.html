@@ -28,7 +28,7 @@
 				<div sec:authorize="isAuthenticated()">
 					<a href="javascript:;">
 						<i class="layui-icon layui-icon-username"></i>
-						nihilityer
+						<span sec:authentication="name"></span>
 					</a>
 					<dl class="layui-nav-child layui-bg-black">
 						<dd><a th:href="@{/}">前台页面</a></dd>

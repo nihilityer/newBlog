@@ -30,7 +30,7 @@
 				<div sec:authorize="isAuthenticated()">
 					<a href="javascript:;">
 						<i class="layui-icon layui-icon-username"></i>
-						nihilityer
+						<span sec:authentication="name"></span>
 					</a>
 					<dl class="layui-nav-child layui-bg-black">
 						<dd><a th:href="@{/admin/mBlog}">管理博客</a></dd>

@@ -22,8 +22,6 @@ public class Users {
     private String userName;
     @TableId("user_password")
     private String userPassword;
-    @TableId("user_sex")
-    private Integer userSex;
     @TableId("user_role")
     private String userRole;
 }

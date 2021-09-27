@@ -42,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("用户未找到");
         }
 
-        List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList("root");
+        List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(users.getUserRole());
 
         return new User(users.getUserName(),
                 new BCryptPasswordEncoder().encode(users.getUserPassword()), auths);
