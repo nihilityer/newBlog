@@ -45,18 +45,13 @@
 				<div class="layui-card-header" style="text-align: center;"><b>博客列表</b></div>
 				<div class="layui-card-body" th:each="blog, blogStat:${blogList}">
 					<!-- 一条博客占一个 -->
-					<div class="layui-panel" style="height: 11.5rem;">
-						<a th:href="@{'/reading/'+${blog.getBlogId()}}" class="layui-col-lg12" style="margin-left: 5%; height: 20%; margin-top: 1%;">
+					<div class="layui-panel" style="height: 4rem;">
+						<a th:href="@{'/reading/'+${blog.getBlogId()}}" class="layui-col-lg12" style="margin-left: 5%; height: 5%; margin-top: 1%;">
 							<strong th:text="${blog.getBlogTitle()}"></strong>
 						</a>
-						<p class="layui-col-lg12" style="margin-left: 2%;">
-							<a href="" class="layui-col-lg2 layui-show-lg-inline-block">
-								<img th:src="@{../img/start.jpg}" style="height: 6.25rem; width: 6.25rem;" class=""  alt="test"/>
-							</a>
-						</p>
-						<div class="" style="margin-top: 15%; margin-left: 2%;">
-							<a href="" th:text="${blog.getCreater()}">博主</a>
-							<span th:text="'创建时间: '+${format.format(blog.getCreateTime())}">发布时间</span>
+						<div class="" style="margin-top: 5%; margin-left: 2%;">
+							<p>[[${blog.getCreater()}]]  <span th:text="'创建时间: '+${format.format(blog.getCreateTime())}">发布时间</span></p>
+
 						</div>
 					</div>
 				</div>
@@ -73,9 +68,9 @@
 				</div>
 				<!-- 往期文章列表 -->
 				<div class="layui-card" style="margin-top: 10%;">
-					<div class="layui-card-header">往期文章</div>
+					<div class="layui-card-header">夹带私货</div>
 					<div class="layui-card-body" th:each="blog, blogStat:${blogList}">
-						<a th:href="@{'/reading/'+${blog.getBlogId()}}"><p th:text="${blog.getBlogTitle()}"></p></a>
+						<a th:href="@{'/reading/'+${blog.getBlogId()}}" th:if="${blog.getCreater().equals('Nihilityer')}"><p th:text="${blog.getBlogTitle()}"></p></a>
 					</div>
 				</div>
 			</div>

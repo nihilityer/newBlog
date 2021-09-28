@@ -2,9 +2,13 @@ package com.nihilityer.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.nihilityer.entity.Blog;
+import com.nihilityer.entity.Users;
 import com.nihilityer.mapper.BlogMapper;
+import com.nihilityer.mapper.UsersMapper;
 import com.nihilityer.service.UpdateWebInfoService;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,11 +31,14 @@ public class AdminWriteBlog {
 
     private final BlogMapper blogMapper;
 
+    private final UsersMapper usersMapper;
+
     private final UpdateWebInfoService updateWebInfoService;
 
-    public AdminWriteBlog(UpdateWebInfoService updateWebInfoService, BlogMapper blogMapper) {
+    public AdminWriteBlog(UpdateWebInfoService updateWebInfoService, BlogMapper blogMapper, UsersMapper usersMapper) {
         this.updateWebInfoService = updateWebInfoService;
         this.blogMapper = blogMapper;
+        this.usersMapper = usersMapper;
     }
 
     /**
@@ -71,13 +78,18 @@ public class AdminWriteBlog {
         Blog blog = new Blog();
         blog.setBlogTitle(title);
         blog.setText(textBody);
-        blog.setCreater("Nihilityer");
-        blog.setCreaterId(1000000001);
+
+        QueryWrapper<Users> usersQueryWrapper = new QueryWrapper<>();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        usersQueryWrapper.eq("user_name", authentication.getName());
+        Users users = usersMapper.selectOne(usersQueryWrapper);
+
+        blog.setCreater(users.getUserName());
+        blog.setCreaterId(users.getUserId());
         blog.setCreateTime(new Date());
-        int insert = blogMapper.insert(blog);
-        if (insert != 1) {
-            throw new RuntimeException("存储失败！");
-        }
+        System.out.println("blog = " + blog);
+        blogMapper.insert(blog);
 
         response.sendRedirect("/admin/mBlog");
     }

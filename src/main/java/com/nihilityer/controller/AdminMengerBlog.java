@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.nihilityer.entity.Blog;
 import com.nihilityer.mapper.BlogMapper;
 import com.nihilityer.service.UpdateWebInfoService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,8 +50,20 @@ public class AdminMengerBlog {
         }
 
         QueryWrapper<Blog> blogQueryWrapper = new QueryWrapper<>();
-        blogQueryWrapper.groupBy("blog_id");
-        List<Blog> blogs = blogMapper.selectList(blogQueryWrapper);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
+        GrantedAuthority grantedAuthority = authorities.get(0);
+        String authority = grantedAuthority.getAuthority();
+        List<Blog> blogs;
+
+        if (authority.equals("root")) {
+            blogQueryWrapper.groupBy("blog_id");
+        } else {
+            //查询需要显示只有当前用户的
+            blogQueryWrapper.eq("creater", authentication.getName());
+        }
+        blogs = blogMapper.selectList(blogQueryWrapper);
 
         mengerBlog.addObject("blogList",blogs);
         //时间输出格式调整

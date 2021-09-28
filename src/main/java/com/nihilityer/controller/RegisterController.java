@@ -1,5 +1,6 @@
 package com.nihilityer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.nihilityer.entity.Users;
 import com.nihilityer.mapper.UsersMapper;
 import org.apache.ibatis.annotations.Param;
@@ -61,9 +62,16 @@ public class RegisterController {
             users.setUserPassword(password);
             users.setUserRole("user");
 
-            int insert = usersMapper.insert(users);
-            if (insert == 1) {
-                response.sendRedirect("/login");
+            QueryWrapper<Users> usersQueryWrapper = new QueryWrapper<>();
+            usersQueryWrapper.eq("user_name", userName);
+            Users selectOne = usersMapper.selectOne(usersQueryWrapper);
+            if (selectOne != null) {
+                int insert = usersMapper.insert(users);
+                if (insert == 1) {
+                    response.sendRedirect("/login");
+                } else {
+                    response.sendRedirect("/register");
+                }
             } else {
                 response.sendRedirect("/register");
             }

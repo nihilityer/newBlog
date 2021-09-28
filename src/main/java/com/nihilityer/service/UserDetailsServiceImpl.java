@@ -38,10 +38,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         wrapper.eq("user_id", userId);
         Users users = usersMapper.selectOne(wrapper);
 
-        if (users == null) {
-            throw new UsernameNotFoundException("用户未找到");
-        }
-
         List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(users.getUserRole());
 
         return new User(users.getUserName(),
