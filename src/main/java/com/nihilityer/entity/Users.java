@@ -17,7 +17,7 @@ import lombok.*;
 @NoArgsConstructor
 @TableName("userinfo")
 public class Users {
-    @TableId(value = "user_id", type = IdType.AUTO)
+    @TableId(value = "user_id")
     private String userId;
     @TableId("user_name")
     private String userName;

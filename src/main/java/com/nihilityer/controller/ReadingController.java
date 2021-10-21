@@ -44,10 +44,7 @@ public class ReadingController {
     public ModelAndView toReading(@PathVariable("blogId") String blogId) {
         ModelAndView reading = new ModelAndView();
 
-        boolean isUpdate = updateWebInfoService.addVisitsOne();
-        if (!isUpdate) {
-            throw new RuntimeException("数据库更新失败");
-        }
+        updateWebInfoService.addVisitsOne();
 
         QueryWrapper<Blog> blogQueryWrapper = new QueryWrapper<>();
         blogQueryWrapper.eq("blog_id", blogId);

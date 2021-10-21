@@ -58,7 +58,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1)
                 .expiredUrl("/login");
 
-
+        http.headers().frameOptions().disable();
     }
 
     @Override

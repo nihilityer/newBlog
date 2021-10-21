@@ -65,7 +65,7 @@ public class RegisterController {
             QueryWrapper<Users> usersQueryWrapper = new QueryWrapper<>();
             usersQueryWrapper.eq("user_name", userName);
             Users selectOne = usersMapper.selectOne(usersQueryWrapper);
-            if (selectOne != null) {
+            if (selectOne == null) {
                 int insert = usersMapper.insert(users);
                 if (insert == 1) {
                     response.sendRedirect("/login");
