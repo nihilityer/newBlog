@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * @PackageName com.nihilityer.addWebCollector.config
  * @ClassName WebInfoConfig
- * @Description
+ * @Description webinfo配置类
  * @Author nihilityer
  * @Date 2021/10/23 16:30
  */

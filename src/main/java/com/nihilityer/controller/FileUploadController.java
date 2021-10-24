@@ -36,13 +36,13 @@ public class FileUploadController {
         this.fileService = fileService;
     }
 
-    @PostMapping(value = "/postFile")
+    @PostMapping(value = "/postPhoto")
     @ResponseBody
     public FileResponse addFile(@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
         String fileName = fileService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/getFile/")
+                .path("/getPhoto/")
                 .path(fileName)
                 .toUriString();
 
@@ -51,14 +51,25 @@ public class FileUploadController {
         return new FileResponse(1,fileName + "!" + file.getContentType() + "!" + file.getSize(), fileDownloadUri);
     }
 
-    @PostMapping("/postFiles")
-    public List<FileResponse> addFiles(@RequestParam("files") MultipartFile[] files) {
+    /**
+     *
+     * @param files 多个文件使用的参数
+     * @return 这个方法其实在网站中没有用到，但是为了方便扩展，所以留了下来
+     */
+    @PostMapping("/postPhotos")
+    public List<FileResponse> addFiles(@RequestParam("Photos") MultipartFile[] files) {
         return Arrays.stream(files)
                 .map(this::addFile)
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/getFile/{fileName:.+}")
+    /**
+     *
+     * @param fileName 需要下载的txt文件名
+     * @param request 下载需要的参数
+     * @return 文件下载
+     */
+    @GetMapping("/getPhoto/{fileName:.+}")
     public ResponseEntity<Resource> getFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = fileService.loadFileAsResource(fileName);

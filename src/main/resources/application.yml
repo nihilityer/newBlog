@@ -5,6 +5,10 @@ spring:
   profiles:
     active: prod
 
+file:
+  photo-dir: ./photo
+  text-dir: ./text
+
 #爬虫依赖配置
 webinfo:
   map:

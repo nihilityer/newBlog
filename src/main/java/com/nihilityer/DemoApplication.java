@@ -8,9 +8,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @MapperScan("com.nihilityer.mapper")
-@EnableConfigurationProperties({
-        FileConfig.class
-})
 public class DemoApplication {
 
     public static void main(String[] args) {

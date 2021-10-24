@@ -17,10 +17,6 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-jdbc</artifactId>-->
-<!--        </dependency>-->
         <!-- 爬虫依赖-->
         <dependency>
             <groupId>cn.edu.hfut.dmic.webcollector</groupId>
@@ -30,10 +26,6 @@
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.json</groupId>
-                    <artifactId>json</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -49,11 +41,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis.spring.boot</groupId>-->
-<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-<!--            <version>2.2.0</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -79,32 +66,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
-<!--            <artifactId>jackson-databind</artifactId>-->
-<!--            <version>2.13.0</version>-->
-<!--        </dependency>-->
-        <!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>fastjson</artifactId>-->
-<!--            <version>1.1.73.android</version>-->
-<!--        </dependency>-->
-        <!--        <dependency>-->
-<!--            <groupId>org.codehaus.jackson</groupId>-->
-<!--            <artifactId>jackson-core-asl</artifactId>-->
-<!--            <version>1.9.13</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.codehaus.jackson</groupId>-->
-<!--            <artifactId>jackson-mapper-asl</artifactId>-->
-<!--            <version>1.9.13</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * @PackageName com.nihilityer
  * @ClassName UniversalCrawler
- * @Description
+ * @Description 通用小说爬取类，调用webCollector框架实现的专爬小说的类
  * @Author nihilityer
  * @Date 2021/10/23 11:01
  */

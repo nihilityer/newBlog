@@ -27,13 +27,13 @@ import java.util.Objects;
 @Service
 public class FileService {
 
-    private final Path fileLocation;
+    private final Path photoLocation;
 
     @Autowired
-    public FileService(FileConfig fileProperties) {
-        this.fileLocation = Paths.get(fileProperties.getUploadDir()).toAbsolutePath().normalize();
+    public FileService(FileConfig fileConfig) {
+        this.photoLocation = Paths.get(fileConfig.getPhotoDir()).toAbsolutePath().normalize();
         try {
-            Files.createDirectories(this.fileLocation);
+            Files.createDirectories(this.photoLocation);
         } catch (Exception ex) {
             throw new FileException("Could not create the directory where the uploaded files will be stored.", ex);
         }
@@ -56,7 +56,7 @@ public class FileService {
             }
 
             // Copy file to the target location (Replacing existing file with the same name)
-            Path targetLocation = this.fileLocation.resolve(fileName);
+            Path targetLocation = this.photoLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             return fileName;
@@ -72,7 +72,7 @@ public class FileService {
      */
     public Resource loadFileAsResource(String fileName) {
         try {
-            Path filePath = this.fileLocation.resolve(fileName).normalize();
+            Path filePath = this.photoLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if(resource.exists()) {
                 return resource;

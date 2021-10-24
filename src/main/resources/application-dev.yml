@@ -15,6 +15,3 @@ spring:
   #关闭thymeleaf页面缓存
   thymeleaf:
     cache: false
-
-file:
-  upload-dir: ./uploads
