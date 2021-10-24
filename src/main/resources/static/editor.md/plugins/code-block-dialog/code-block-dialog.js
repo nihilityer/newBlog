@@ -82,7 +82,7 @@
             }
             else 
             {      
-                var dialogHTML = "<div class=\"" + classPrefix + "code-toolbar\">" +
+                var dialogHTML = "<div class=\"" + classPrefix + "code-toolbar layui-form\">" +
                                         dialogLang.selectLabel + "<select><option selected=\"selected\" value=\"\">" + dialogLang.selectDefaultText + "</option></select>" +
                                     "</div>" +
                                     "<textarea placeholder=\"" + dialogLang.placeholder + "\" style=\"display:none;\">" + selection + "</textarea>";
@@ -91,7 +91,7 @@
                     name   : dialogName,
                     title  : dialogLang.title,
                     width  : 780,
-                    height : 565,
+                    height : 600,
                     mask   : settings.dialogShowMask,
                     drag   : settings.dialogDraggable,
                     content    : dialogHTML,
@@ -145,10 +145,11 @@
 				for (var key in codeLanguages)
 				{
 					var codeLang = codeLanguages[key];
-					langSelect.append("<option value=\"" + key + "\" mode=\"" + codeLang[1] + "\">" + codeLang[0] + "</option>");
+					langSelect.append("<option value=\'" + key + "\' mode=\'" + codeLang[1] + "\'>" + codeLang[0] + "</option>");
 				}
 
 				langSelect.append("<option value=\"other\">" + dialogLang.otherLanguage + "</option>");
+				layui.form.render('select');
 			}
 			
 			var mode   = langSelect.find("option:selected").attr("mode");

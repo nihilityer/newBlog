@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: prod
+
+#爬虫依赖配置
+webinfo:
+  map:
+    shencou:
+      url: 'http://www.shencou.com'
+      titleCssSelect: 'h1'
+      contentCssSelect: 'body'
+      needContentRegex: true
+      contentRegex: '((.+)font3)?'
+      bookCssSelect: '#breadCrumb > a:nth-child(2)'
+
+    luoqiuzw:
+      url: 'https://www.luoqiuzw.com'
+      titleCssSelect: '#main > div > div > div.bookname > h1'
+      contentCssSelect: '#content'
+      needContentRegex: false
+      contentRegex: 'notNeed'
+      bookCssSelect: '#main > div > div > div.con_top > a:nth-child(3)'

@@ -88,7 +88,7 @@ public class AdminWriteBlog {
         blog.setCreater(users.getUserName());
         blog.setCreaterId(users.getUserId());
         blog.setCreateTime(new Date());
-        System.out.println("blog = " + blog);
+//        System.out.println("blog = " + blog);
         blogMapper.insert(blog);
 
         response.sendRedirect("/admin/mBlog");
